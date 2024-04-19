@@ -1,3 +1,8 @@
+<?php
+include 'config.php';
+
+$PatientID = isset($_GET['PatientID']) ? $_GET['PatientID'] : null;
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +16,7 @@
 
     <form action="process_add_admission.php" method="POST">
         <label for="PatientID">Patient ID:</label>
-        <input type="text" name="PatientID" required><br>
+        <input type="text" name="PatientID" value="<?php echo $PatientID; ?>" required><br>
 
         <label for="DateTimeAdmission">Admission Date:</label>
         <input type="date" name="DateTimeAdmission" required><br>
