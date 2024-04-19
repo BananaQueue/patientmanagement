@@ -4,10 +4,14 @@ include 'config.php';
 $PatientID = $_GET['PatientID'];
 // Check if the form is submitted for deletion
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $sql = "DELETE FROM patients WHERE PatientID=$PatientID";
+    $sql = "DELETE FROM admissions WHERE PatientID=$PatientID";
 
     if ($conn->query($sql) === TRUE) {
-        echo "Patient deleted successfully";
+        $sql = "DELETE FROM patients WHERE PatientID=PatientID";
+        if ($conn->query($sql) === TRUE) {
+            echo "Patient deleted successfully";
+            header("Location:http://localhost/patientMngmt/loading_page.php");
+        }
     } else {
         echo "Error deleting record: " . $conn->error;
     }
