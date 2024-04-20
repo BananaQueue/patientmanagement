@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "DELETE FROM admissions WHERE PatientID=$PatientID";
 
     if ($conn->query($sql) === TRUE) {
-        $sql = "DELETE FROM patients WHERE PatientID=PatientID";
+        $sql = "DELETE FROM patients WHERE PatientID=$PatientID";
         if ($conn->query($sql) === TRUE) {
             echo "Patient deleted successfully";
             header("Location:http://localhost/patientMngmt/loading_page.php");
@@ -28,6 +28,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@700&family=Bree+Serif&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <title>Delete Patient</title>
     <script>
         function confirmDelete() {
@@ -37,11 +39,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
-    <h1>Delete Patient</h1>
+    <div class="container" id="delete">
+        <h1>Delete Patient</h1>
 
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>?PatientID=<?php echo $PatientID; ?>" method="post" onsubmit="return confirmDelete();">
-        <input type="submit" value="Delete">
-    </form>
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>?PatientID=<?php echo $PatientID; ?>" method="post" onsubmit="return confirmDelete();">
+            <input type="submit" value="Delete">
+        </form>
+        <div>
+            <h2><a href='index.php'>Go Home</a> | <a href="#" onclick="history.go(-1)">Go Back</a></h2>
+        </div>
+    </div>
 </body>
 
 </html>

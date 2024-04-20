@@ -10,7 +10,7 @@ $sql = "INSERT INTO admissions (PatientID, DateTimeAdmission, Ward)
 
 if ($conn->query($sql) === TRUE) {
     echo "Patient admitted successfully";
-    header("Location:http://localhost/patientMngmt/add_admission.php");
+    header("Location:http://localhost/patientMngmt/fetch_admissions.php");
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }
