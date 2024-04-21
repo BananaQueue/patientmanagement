@@ -1,6 +1,12 @@
 <?php
 include 'config.php';
 
+session_start();
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    header("Location:http://localhost/patientMngmt/login.php");
+    exit;
+}
+
 $query = $_GET['query'];
 
 
@@ -47,7 +53,7 @@ $result = $conn->query($sql);
             ?>
         </table>
         <div>
-            <h2><a href='index.php'>Go Home</a></h2>
+            <h2><a href='dashboard.php'>Go Home</a></h2>
         </div>
     </div>
 </body>

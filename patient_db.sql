@@ -16,3 +16,9 @@ CREATE TABLE Admissions (
     DateTimeAdmission DATETIME,
     DateTimeDischarge DATETIME
 );
+
+CREATE TABLE Users (
+    UserID INT PRIMARY KEY AUTO_INCREMENT,
+    userName VARCHAR(50) UNIQUE NOT NULL,
+    passWord VARCHAR(255) NOT NULL
+);

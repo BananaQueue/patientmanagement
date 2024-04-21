@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    header("Location:http://localhost/patientMngmt/login.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,7 +50,7 @@
         mysqli_close($conn);
         ?>
         <div>
-            <h2><a href='index.php'>Go Home</a></h2>
+            <h2><a href='dashboard.php'>Go Home</a></h2>
         </div>
     </div>
 </body>

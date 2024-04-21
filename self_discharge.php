@@ -1,9 +1,14 @@
 <?php
+include 'config.php';
 session_start();
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     header("Location:http://localhost/patientMngmt/login.php");
     exit;
 }
+
+$PatientID = $_GET['PatientID'];
+$sql = "SELECT * FROM Admissions WHERE PatientID =$PatientID AND DateTimeDischarge IS NULL"; // Only select active admissions
+$result = mysqli_query($conn, $sql);
 ?>
 
 <!DOCTYPE html>
@@ -19,17 +24,15 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <div class="boxy">
         <h2>Discharge A Patient</h2>
         <form action="process_discharge.php" method="POST">
-            <label>Select Admission:</label><br>
-            <select name="AdmissionID">
-                <?php
-                include_once 'config.php';
-                $sql = "SELECT * FROM Admissions WHERE DateTimeDischarge IS NULL"; // Only select active admissions
-                $result = mysqli_query($conn, $sql);
-                while ($row = mysqli_fetch_assoc($result)) {
-                    echo "<option value='" . $row['AdmissionID'] . "'>Admission ID: " . $row['AdmissionID'] . ", Patient ID: " . $row['PatientID'] . "</option>";
-                }
-                $conn->close();;
-                ?>
+            <?php
+            if ($row = mysqli_fetch_assoc($result)) {
+                echo '<input type="hidden" name="AdmissionID" value="' . $row['AdmissionID'] . '" required><br>';
+                echo '<label>Admission ID: ' . $row['AdmissionID'] . '</label><br>';
+                echo '<label>Patient ID: ' . $row['PatientID'] . ' </label><br>';
+                echo '<label>Ward: ' . $row['Ward'] . ' </label><br>';
+            }
+            $conn->close();;
+            ?>
             </select><br>
             <label>Discharge Date and Time:</label><br>
             <input type="datetime-local" name="DateTimeDischarge"><br>

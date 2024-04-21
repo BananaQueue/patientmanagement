@@ -1,6 +1,12 @@
 <?php
 include 'config.php';
 
+session_start();
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    header("Location:http://localhost/patientMngmt/login.php");
+    exit;
+}
+
 $PatientID = $_GET['PatientID'];
 // Check if the form is submitted for deletion
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -10,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $sql = "DELETE FROM patients WHERE PatientID=$PatientID";
         if ($conn->query($sql) === TRUE) {
             echo "Patient deleted successfully";
-            header("Location:http://localhost/patientMngmt/loading_page.php");
+            header("Location:http://localhost/patientMngmt/dashboard.php");
         }
     } else {
         echo "Error deleting record: " . $conn->error;
@@ -46,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="submit" value="Delete">
         </form>
         <div>
-            <h2><a href='index.php'>Go Home</a> | <a href="#" onclick="history.go(-1)">Go Back</a></h2>
+            <h2><a href='dashboard.php'>Go Home</a> | <a href="#" onclick="history.go(-1)">Go Back</a></h2>
         </div>
     </div>
 </body>

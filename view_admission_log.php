@@ -1,6 +1,16 @@
 <?php
 include 'config.php';
 
+session_start();
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    header("Location:http://localhost/patientMngmt/login.php");
+    exit;
+}
+
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    header("Location:http://localhost/patientMngmt/login.php");
+    exit;
+}
 
 $sql = "SELECT * FROM admissions";
 $result = $conn->query($sql);
@@ -39,7 +49,7 @@ $result = $conn->query($sql);
             ?>
         </table>
         <div>
-            <h2><a href='index.php'>Go Home</a>| <a href="#" onclick="history.go(-1)">Go Back</a></h2>
+            <h2><a href='dashboard.php'>Go Home</a>| <a href="#" onclick="history.go(-1)">Go Back</a></h2>
         </div>
     </div>
 </body>

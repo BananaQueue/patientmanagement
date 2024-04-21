@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    header("Location:http://localhost/patientMngmt/login.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +17,7 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="rectangular">
         <h1>Add New Patient</h1>
 
         <form action="process_add_patient.php" method="POST">
@@ -34,7 +42,7 @@
             <button type="submit">Add Patient</button>
         </form>
         <div>
-            <h2><a href='index.php'>Go Home</a></h2>
+            <h2><a href='dashboard.php'>Go Home</a></h2>
         </div>
     </div>
 

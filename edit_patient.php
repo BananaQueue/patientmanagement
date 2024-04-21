@@ -1,6 +1,11 @@
 <?php
 include 'config.php';
 
+session_start();
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    header("Location:http://localhost/patientMngmt/login.php");
+    exit;
+}
 $PatientID = $_GET['PatientID'];
 
 $sql = "SELECT * FROM patients WHERE PatientID = $PatientID";
@@ -19,7 +24,7 @@ $row = $result->fetch_assoc();
 </head>
 
 <body>
-    <div class="container">
+    <div class="rectangular ">
         <h1>Edit Patient</h1>
 
         <form action="process_edit_patient.php" method="POST">
