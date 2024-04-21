@@ -13,7 +13,7 @@ $sql = "INSERT INTO patients (LastName, FirstName, MiddleName, Suffix, DateOfBir
 
 if ($conn->query($sql) === TRUE) {
     echo "New patient added successfully";
-    header("Location:http://localhost/patientMngmt/index.php");
+    header("Location:http://localhost/patientMngmt/dashboard.php");
     exit;
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;

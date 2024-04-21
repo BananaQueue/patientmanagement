@@ -18,7 +18,7 @@ $sql = "UPDATE patients SET FirstName='$FirstName', MiddleName='$MiddleName', La
 
 if ($conn->query($sql) === TRUE) {
     echo "Patient details updated successfully";
-    header("Location:http://localhost/patientMngmt/index.php");
+    header("Location:http://localhost/patientMngmt/dashboard.php");
 } else {
     echo "Error updating record: " . $conn->error;
 }
